@@ -1,19 +1,57 @@
-# 🎈 Blank app template
+# 수학 학습자 유형 분석 — Streamlit 웹앱
 
-A simple Streamlit app template for you to modify!
+K-평균 군집화를 활용한 수학 학습자 유형 분석 대시보드입니다.
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://blank-app-template.streamlit.app/)
+## 실행 방법
 
-### How to run it on your own machine
+### 1. 패키지 설치
+```bash
+pip install -r requirements.txt
+```
 
-1. Install the requirements
+### 2. 앱 실행
+```bash
+streamlit run app.py
+```
 
-   ```
-   $ pip install -r requirements.txt
-   ```
+브라우저에서 `http://localhost:8501` 접속
 
-2. Run the app
+---
 
-   ```
-   $ streamlit run streamlit_app.py
-   ```
+## 데이터 파일 형식
+
+엑셀(.xlsx / .xls) 파일을 업로드하세요.  
+아래 **컬럼명이 정확히** 포함되어 있어야 합니다.
+
+| 요인 | 컬럼명 예시 |
+|------|------------|
+| 수학불안 (A) | `A1. 수학 시간에 어려운 문제가 나오면 긴장된다.` ~ `A8. ...` |
+| 자기효능감 (E) | `E1. 나는 노력하면 수학 실력을 향상시킬 수 있다고 생각한다.` ~ `E8. ...` |
+| 수학흥미 (I) | `I1. 수학 문제를 해결했을 때 성취감을 느낀다.` ~ `I8. ...` |
+| 학습태도 (T) | `T1. 나는 수학 공부 계획을 세우고 실천하는 편이다.` ~ `T6. ...` |
+
+> 파일 없이 실행하면 **데모 데이터**로 자동 동작합니다.
+
+---
+
+## 앱 구성 (탭)
+
+| 탭 | 내용 |
+|----|------|
+| 📋 연구 개요 | 분석 목적, 군집 결과 요약, Z-score 비교표 |
+| 📝 설문 문항 | A/E/I/T 전체 문항 목록 (역채점 표시 포함) |
+| 📉 Elbow 분석 | 변수 선택 + K 범위 슬라이더로 인터랙티브 탐색 |
+| 👥 군집 인원 | 각 군집 학생 수 막대 그래프 |
+| 🗺️ 프로파일 히트맵 | 원점수 / 표준화 히트맵 |
+| 🕸️ 레이더 차트 | 군집별 프로파일 레이더 (표시 군집 선택 가능) |
+| ⚙️ Centroid 변화 | K-Means 반복 수렴 과정 6단계 시각화 |
+| 🔵 PCA 산점도 | PCA 2D + 변수 선택 산점도 |
+| 🎯 결론 및 지도 방안 | K=3 결론, 군집별 맞춤 교수 전략 |
+
+---
+
+## 사이드바 설정
+
+- **분석 변수 선택**: 4개 하위요인 중 사용할 변수 체크박스
+- **클러스터 수 K**: 슬라이더로 K 변경 → 전체 분석 즉시 반영
+- **Elbow K 범위**: K 최솟값/최댓값 설정

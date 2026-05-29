@@ -328,7 +328,7 @@ def plot_elbow(ks, inertias, k_sel):
                            text=f"  ← K={k_sel} 선택",
                            showarrow=False, font=dict(color="#E03131", size=12),
                            xanchor="left")
-        fig.add_vline(x=k_sel, line_dash="dot", line_color="#E0313150", line_width=1.5)
+        fig.add_vline(x=k_sel, line_dash="dot", line_color="rgba(224,49,49,0.3)", line_width=1.5)
     fig.update_layout(
         xaxis=dict(title="클러스터 수 (K)", tickvals=ks, gridcolor="#f0f1f3"),
         yaxis=dict(title="Inertia", gridcolor="#f0f1f3"),
@@ -345,7 +345,7 @@ def plot_counts(df_res, k):
     colors = CLUSTER_COLORS[:k]
     fig = go.Figure(go.Bar(
         x=labels, y=vals,
-        marker_color=[c + "28" for c in colors],
+        marker_color=["rgba({},{},{},0.15)".format(int(c[1:3],16),int(c[3:5],16),int(c[5:7],16)) for c in colors],
         marker_line_color=colors, marker_line_width=1.5,
         text=vals, textposition="outside",
         textfont=dict(size=14, color=colors),
@@ -390,7 +390,7 @@ def plot_radar(profile_z, show_list):
         vals = list(row.values) + [row.values[0]]
         fig.add_trace(go.Scatterpolar(
             r=vals, theta=cats_c, fill="toself",
-            fillcolor=CLUSTER_COLORS[i] + "22",
+            fillcolor="rgba({},{},{},0.13)".format(*[int(CLUSTER_COLORS[i][j:j+2],16) for j in (1,3,5)]),
             line=dict(color=CLUSTER_COLORS[i], width=2.5),
             name=f"C{i+1} {CLUSTER_NAMES[i] if i < len(CLUSTER_NAMES) else ''}",
             marker=dict(size=7, color=CLUSTER_COLORS[i]),
